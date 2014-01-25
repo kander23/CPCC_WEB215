@@ -1,0 +1,246 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+   Browser styles reset 
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body { 	line-height: 1; }
+ol, ul { 	list-style: none; }
+blockquote, q { 	quotes: none; }
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* End Browser Reset */
+
+
+/*
+footer v-alignment
+http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
+*/
+html,
+body {
+  background: url('../images/sunset_hawaii.jpg') no-repeat center center fixed; 
+  background-size: cover;
+  height:100%;
+  font-family: Verdana, Arial, Sans-Serif;
+  font-size: 1.0em;
+  text-shadow: 0.07em 0.08em #FFAD33;
+  font-weight: bold;
+}
+#container {
+   font-family:Verdana, Geneva, sans-serif;
+   min-height:100%;
+   position:relative;
+   
+}
+
+#contentwrap {
+   position:relative;
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+   font-size: 0.9em;
+   margin-left: auto;
+   margin-right: auto;
+   width: 75%;
+   
+}
+
+#contentwrap  div.shade{
+position: absolute;
+background-color: #FFE0B2;
+opacity:0.4;
+width:100%;
+height:255px;
+/*filter:alpha(opacity=40);  For IE8 and earlier */
+z-index: 100;
+}
+
+#contentwrap div.list_wrap{
+z-index: 110;
+position: absolute;
+}
+
+#contentwrap div.list_wrap{
+padding-left: 1%;
+padding-right: 1%;
+padding-top: 2%;
+}
+
+#contentwrap div.list_wrap li{
+line-height: 1.4em;
+padding-bottom: 2%;
+
+}
+
+#contentwrap div.list_wrap li span.signedat{
+margin-left: 10%;
+text-shadow: 0.07em 0.08em #7A7A7A;
+
+}
+
+#contentwrap div.list_wrap li span.signtr{
+margin-left: 2%;
+text-shadow: 0.07em 0.08em #7A7A7A;
+}
+
+#popup{
+position: absolute;
+z-index: 120;
+top:68%;
+left: 30%;
+width: 500px;
+min-height: 20px;
+border: 2px solid #FFDB4D;
+background-color: #000000;
+color: #FFFFFF;
+font-size: 0.1em;
+text-shadow: none;
+padding: 5px 10px;
+border-radius: 10px;
+display: none;
+}
+
+
+#popup span.prompt{
+margin-left: 10px;
+color: #FFCC00;
+font-weight: bold;
+}
+
+#popup img{
+margin-top:1px;
+margin-right: 1px;
+float: right;
+cursor: pointer;
+}
+
+#popup img:hover{
+margin: 0;
+border: 1px solid red;
+}
+
+#contentwrap div.header{
+position: relative;
+width: 40%;
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+padding-top: 2%;
+padding-bottom: 3%;
+}
+
+#contentwrap div.header h1{
+font-size: 1.5em;
+font-weight:bold;
+width: 100%;
+}
+#contentwrap div.header h3{
+font-size: 1.3em;
+width: 100%;
+}
+
+footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background: transparent;
+}
+
+footer a{
+color: #9AD7FC;
+font-size: 0.8em;
+text-decoration: none;
+ 
+}
+
+footer a:hover, footer a:active{
+text-decoration: underline;
+}
+
+footer a.selected:visited{
+color: purple;
+font-size: 0.8em;
+}
+
+footer a:visited{
+color: 	blue;
+}
+
+
+
+
+/*  End Footer vertical align */
+
+
+
+
+footer ul{
+margin-top: 10px;
+}
+
+footer li{
+float: left;
+margin-right: 20px;
+}
+
+
+
+footer div.validated {
+float: right;
+margin-top: 10px;
+margin-right: 2%;
+}
+footer div.validated img {
+border:0;
+width:60px;
+height:auto;
+}
+
+footer div.cpyrght{
+font-size: 0.6em;
+color: white;
+margin-top: 40px;
+margin-left: 25%;
+}
+
+footer div.cpyrght a{
+color: white;
+text-decoration: none;
+}
+
+footer div.cpyrght a:hover{
+color: white;
+text-decoration: underline;
+}

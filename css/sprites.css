@@ -1,0 +1,141 @@
+/**
+  generic footer styling
+  @link http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
+*/
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+   background: url("../images/circuit_board_medium.jpg") no-repeat center center fixed; 
+   background-size: cover;
+   font-family: Verdana, Geneva, sans-serif;
+   font-size: 0.9em;
+}
+#container {
+   min-height:100%;
+   position:relative;
+}
+#header {
+   position: relative;
+   width: 100%;
+   background: transparent;
+   padding:10px;
+   padding-top: 1%;
+}
+#body {
+   position: relative;
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+}
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background: transparent;
+}
+
+/* End footer code */
+
+#footer div.validate{
+float: right;
+padding: 0% 4%;
+margin-top: 1%;
+}
+
+#footer div.validate span {
+display: inline-block;
+height: 32px;
+width: 32px;
+}
+
+#footer div.validate span.css3{
+background-image: url("../images/sprites/button_sprites.png");
+background-position: 0px -70px;
+}
+
+#footer div.validate span.html5{
+background-image: url("../images/sprites/button_sprites.png");
+background-position: 0px -103px;
+}
+
+#header h2{
+
+min-width: 600px;
+margin-left: auto;
+margin-right: auto;
+background-color: #5EB930;
+border: 2px solid #FFFF66;
+border-radius: 15px;
+}
+
+#header h2{
+width: 70%;
+min-height: 40px;
+text-align: center;
+padding-top: 7px;
+color: #FFFF66;
+font-size: 1.6em;
+text-shadow: 0.1em 0.15em 0.05em #134C0B;
+}
+
+
+#body nav {
+width: 95%;
+margin-left: auto;
+margin-right: auto;
+}
+
+#body nav ul{
+min-width: 1150px;
+}
+
+#body nav li{
+display: inline-block;
+width: 180px;
+height: 34px;
+background-image: url("../images/sprites/button_sprites.png");
+background-position: 0px 0px;
+text-align: center;
+color: #FFFF66;
+text-shadow: 0.1em 0.15em 0.05em #134C0B;
+font-size: 1.1em;
+line-height: 30px;
+}
+
+body div.descr_wrap{
+position: relative;
+width: 85%;
+min-width: 1000px;
+min-height: 100px;
+padding: 1% 1%;
+height: 100%;
+margin-left: auto;
+margin-right: auto;
+background-color: #FFFFB2;
+border: 2px solid #5EB930;
+border-radius: 15px;
+}
+
+body div.descr_wrap p{
+font-size: 1.1em;
+font-weight: bold;
+}
+
+body div.descr_wrap img{
+border: 1px solid #000000;
+padding: 2px 2px;
+margin-left: 5%;
+margin-bottom: 26px;
+}
+
+body div.descr_wrap img:hover{
+border: 4px solid #5EB930;
+margin-bottom: 20px;
+}
+
+#body nav li:hover{
+background-image: url("../images/sprites/button_sprites.png");
+background-position: 0px -35px;
+}

@@ -1,0 +1,79 @@
+#header h2{
+width: 70%;
+min-width: 600px;
+margin-left: auto;
+margin-right: auto;
+background-color: #00CCFF;
+border: 2px solid #0033FF;
+border-radius: 15px;
+text-align: center;
+padding: 0.25% 0%
+}
+
+
+#body div.line{
+width: 85%;
+margin-left: auto;
+margin-right: auto;
+min-height: 20px;
+border: 2px solid #0033FF;
+border-radius: 15px;
+padding: 0.6% 1% 0.25% 1%;
+margin-bottom: 4px;
+}
+
+#body div.col_left{
+display: inline-block;
+width: 58%;
+min-height: 32px;
+border: 1px dashed #00CCFF;
+border-radius: 10px;
+}
+
+#body div.col_left:hover{
+background-color: #CCFFFF;
+}
+
+#body div.run_code{
+float: right;
+}
+
+#body div.col_left pre{
+padding-left: 8px;
+max-width: 78%;
+font-size: 0.8em;
+font-family: "Courier New", Courier, monospace;
+float: left;
+}
+
+#body div.col_left input{
+width: 80px;
+font-size: 0.7em;
+font-weight: bold;
+margin: 6px 8px;
+border-radius: 5px;
+float: right;
+}
+
+
+#body div.col_right{
+min-height: 20px;
+float: right;
+width: 40%;
+border: 1px dashed #A0A0A0;
+border-radius: 10px;
+margin-left: 1%;
+padding: 1% 0%;
+}
+
+#body div.code_result{
+text-align: center;
+font-size: 0.8em;
+font-family: "Courier New", Courier, monospace;
+}
+
+#body div.code_result span{
+font-weight: bold;
+font-size: 1.0em;
+margin-right: 20px;
+}
