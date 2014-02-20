@@ -1,0 +1,101 @@
+// scope
+::Q1:: What is the output of the following code block after it executes
+var A \= 1;
+var B \= 2;
+function add(){
+  var A \= 3;
+  var B \= 4;
+  B \= A++;
+  return B;
+}
+Add();
+console.log(B);
+{
+~4
+# Incorrect, no assignment to B is made after add() executes.  Review Scope on page 92.
+=2
+# Correct! The value of B does not change from the return of the function add()
+~1
+# Incorrect, the value of A in the outer block is never assigned to B. Review Scope on page 92
+~3 
+# Incorrect, the starting value of A in the inner block is not assigned to B after the function add() returns. Review Scope on page 92
+}
+
+// Type
+::Q2:: What is the output of the following code block after it executes
+var A = {};
+A["first"] \= ["0","1","2"];
+A["second"] \= {0:"zero", 1:"one", 2:"two"};
+console.log((typeof A.second).toLowerCase());
+{
+~string
+# Incorrect, the typeof opperator is performing a query of the inner container, not one of the inner container's prperties
+=object
+# Correct! A.second is an object containing three properties
+~array
+#Incorrect, A.first is an array, not A.second. Review object and array types on page 104.
+~null
+#Incorrect, the statement A.second is equivalent to A["second"]
+}
+
+//Type 2
+::Q3:: What is the output of the following code block after it executes
+var A \= ["0","1","2"];
+A[0] \= 0;
+console.log((typeof A[0]).toUpperCase());
+{
+~string
+# Incorrect, the original value of A[0] was a string, but it was changed
+~Number
+# Incorrect, the output of the typeof opperator is all formatted to once case
+=NUMBER
+#Correct. The first index of A was changed from a string to a number, and typeof result was formatted as uppercase
+~undefined
+#Incorrect, The index 0 of array A is a valid elememnt 
+}
+
+//Queues
+::Q4:: What is the output of the following code block after it executes
+var A \= [];
+var result;
+A.push("a");
+A.push("b");
+result = A.pop();
+A.push("c");
+A.push(result);
+result = A.pop();
+console.log(result);
+{
+~a
+# Incorrect, the value "a" is the first item pushed intot he array and never removed in the pop() calls.  Review the queue methods on page 113
+~c
+# Incorrect, "c" is pushed into the middle of the array and never popped off.  Review the queue methods on page 113
+=b
+#Correct. The first pop() saved the value "b" to the variable result, and then "b" was pushed back into the array before the last pop()
+~null
+#Incorrect, The pop() calls to A always return a string value in the example above.  Review the queue methods on page 113
+}
+
+//Reversing an array
+::Q5:: What is the output of the following code block after it executes
+var A \= [9,8,7,6,5];
+var result \= "";
+A.pop();
+A.unshift(4);
+A.reverse();
+console.log(A.valueOf());
+{
+~4,5,6,7,8
+# Incorrect.  Review the queue methods on page 113
+~5,6,7,8,9,4
+# Incorrect.  Review the queue methods on page 113
+=5,6,7,8,4
+#Correct. 
+~9,8,7,6,5,4
+#Incorrect. See the reverse function on page 114
+}
+
+
+
+
+

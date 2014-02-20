@@ -136,6 +136,6 @@ margin-bottom: 20px;
 }
 
 #body nav li:hover{
-background-image: url("../images/sprites/button_sprites.png");
+/* background-image: url("../images/sprites/button_sprites.png"); */
 background-position: 0px -35px;
 }

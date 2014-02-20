@@ -1,0 +1,39 @@
+#body div.descr{
+background-color: black;
+padding-top: 25px;
+padding-bottom: 25px;
+width: 25%;
+}
+#swoosh{
+   position: relative;
+  width: 88px;
+  height: 108px;
+  background-color: 	#004C00;
+   transform: scale(2.4,1); /* W3C */
+    -webkit-transform:scale(2.4,1); /* Safari and Chrome */
+    -moz-transform:scale(2.4,1); /* Firefox */
+    -ms-transform:scale(2.4,1); /* IE 9 */
+    -o-transform:scale(2.4,1); /* Opera */
+  margin-left: 33%;
+ border-radius: 60%;
+  border: 1px solid yellow;
+}
+
+#swoosh:after{
+   position: absolute;
+   margin-left: -3px;
+  top: -1px; 
+  content: 'G';  
+
+ margin-top: -5px;
+  color: white;
+   font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 7.9em;
+    transform: scale(1.07, 1.17); /* W3C */
+    -webkit-transform:scale(1.07, 1.17); /* Safari and Chrome */
+    -moz-transform:scale(1.07, 1.17); /* Firefox */
+    -ms-transform:scale(1.07, 1.17); /* IE 9 */
+    -o-transform:scale(1.07, 1.17); /* Opera */
+ 
+}
