@@ -1,0 +1,11 @@
+{
+  "name": "flight",
+  "version": "0.0.0",
+  "description": "a module for flight test",
+  "main": "module.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kevin anderson <test@aol.com>",
+  "license": "ISC"
+}
