@@ -16,7 +16,7 @@ this.oApi._fnCalculateEnd(e)}this.oApi._fnDraw(e);return{nTr:r,iPos:n}}
   model for a single database row
   @classdesc User_Data
   @method: constructor
-  @param {object} p_object object that contains a single data record with the keys: ID, TYPE, NAME, QTY
+  @param {object} p_object object that contains a single data record with the keys: ID, VCODE, VNAME, DESCR, DTTM, ADDBYEID
 */
 var User_Data = function(p_obj){
     
@@ -25,10 +25,10 @@ var User_Data = function(p_obj){
 	}
     
 	if (typeof p_obj !== "object"){ p_obj = {}; }
-    this._id = p_obj._ID || "";
-    this.type = p_obj.TYPE || "";
-    this.name = p_obj.NAME || "";
-    this.qty = p_obj.QTY || "";
+    this.student_id = p_obj.STUDENT_ID || "";
+    this.first_name = p_obj.FIRST_NAME || "";
+    this.last_name = p_obj.LAST_NAME || "";
+    this.hobby = p_obj.HOBBY || "";
 
     
 };
@@ -73,15 +73,7 @@ var App = function(p_obj){
 	}
 	if (typeof p_obj !== "object"){ p_obj = {}; }
 	this.headers = p_obj.headers || "";
-	this.data = [];
-	//this.data = p_obj.data || "";
-	if (p_obj.data && $.isArray(p_obj.data) ){
-		for(var i=0, len = p_obj.data.length; i < len; i++){
-			if (typeof p_obj.data[i] === "object" && "_id" in p_obj.data[i] && "name" in p_obj.data[i] && "qty" in p_obj.data[i] && "type" in p_obj.data[i]){
-				this.data.push([p_obj.data[i]._id, p_obj.data[i].type,p_obj.data[i].name, p_obj.data[i].qty]);
-			}
-		}
-	}
+	this.data = p_obj.data || "";
 	this.$tbl = $('#body').find('table');
 	this.$dataTbl = null;
 	this.editHTML_cell = '<span class="edit"><img src="./images/pencil_sm.png" width="16px" height="16px" alt="Edit" title="Edit"/></span><span class="delete"><img  width="16px" height="16px" src="./images/delete_sm.png" alt="Delete" title="Delete"/></span>';
@@ -143,20 +135,17 @@ App.prototype = {
 				for (i = 0, len = this.data.length; i < len; i++){
 					this.data[i].push(this.editHTML_cell);
 				}
-			
-				// add the first row as an "add new" row
-				this.data.unshift([
-					'<input style="visibility:hidden;" disabled class="new" type="text" placeholder="new student id" value="" data-col-id="'+this.headers[0]+'" />',
-					'<input class="new" type="text" placeholder="Component Type" value="" data-col-id="'+this.headers[1]+'" />',
-					'<input class="new" type="text" placeholder="Component Name" value="" data-col-id="'+this.headers[2]+'" />',
-					'<input class="new" type="text" placeholder="Component Qty" value="" data-col-id="'+this.headers[3]+'" />',
+				// add the last row as an "add new" row
+				this.data.push([
+					'<input class="new" type="text" placeholder="new student id" value="" data-col-id="'+this.headers[0]+'" />',
+					'<input class="new" type="text" placeholder="student first name" value="" data-col-id="'+this.headers[1]+'" />',
+					'<input class="new" type="text" placeholder="student last name" value="" data-col-id="'+this.headers[2]+'" />',
+					'<input class="new" type="text" placeholder="student hobby" value="" data-col-id="'+this.headers[3]+'" />',
 					'<div><span class="savenew"><img width="16px" height="16px" src="./images/save_sm.png" alt="Save" title="Save"/></span></div>'
 				]);
 				
-				// insert the bootstrapped data into the the table
+				// insert the bootstapped data into the the table
 				this.$dataTbl.fnAddData(this.data);
-				
-				
 				
 				
 				/*
@@ -178,7 +167,7 @@ App.prototype = {
 					e.preventDefault();
 					var action, $target = $(e.target);
 					var nRow, rowData;
-					var part_id;
+					var stdt_id;
 					try{
 						if ($.inArray(($target.get(0).tagName).toLowerCase() , ["img","span"]) >= 0 ){
 							
@@ -196,18 +185,17 @@ App.prototype = {
 							else if (action === "savenew"){
 								console.log("savenew");
 								rowData = that.collectRowData(nRow);
-								console.log(rowData);
 								rowData["newrow"] = true;
 								if (typeof rowData === "object" && "valid" in rowData && rowData.valid){
 									that.saveRow(that.$dataTbl, nRow, rowData);
 								}
 							}
 							else if (action === "delete"){
-								part_id = $('td:first', nRow).text();
-								if (typeof part_id === "string" ){
-									doAction = confirm("Are you sure you want to delete the record for: "+ part_id );
+								stdt_id = $('td:first', nRow).text();
+								if (typeof stdt_id === "string" ){
+									doAction = confirm("Are you sure you want to delete the record for: "+ stdt_id );
 									if (doAction){
-										that.deleteRow(that.$dataTbl, nRow, part_id);
+										that.deleteRow(that.$dataTbl, nRow, stdt_id);
 									}
 								}
 							}
@@ -251,7 +239,7 @@ App.prototype = {
 	collectRowData :  function(nRow){
 		var data = { valid: true }, that = this;
 		$(nRow).find('input').each(function(idx, val){
-			if($(this).attr("data-col-id") !== "ID" &&  ($(this).val()).length === 0){
+			if(($(this).val()).length === 0){
 				$(this).addClass("error").one("focusin", function(e){
 					$(this).removeClass("error");
 				});
@@ -278,7 +266,6 @@ App.prototype = {
 		if (typeof rowData === "object"){
 			console.log("save row "+JSON.stringify(rowData));
 			$.ajax({
-				url: "../newpart",
 				data: rowData,
 				dataType: "json",
 				type: "POST",
@@ -289,10 +276,10 @@ App.prototype = {
 							console.log("error: "+data.msg);
 							that.display_row_error(nRow, data.msg);
 						}
-						else if ("_id" in data && "type" in data && "name" in data && "qty" in data){
+						else if ("success" in data){
 							// insert record into table and redraw
 							if ("newrow" in rowData){
-								that.$dataTbl.fnAddDataAndDisplay([ data["_id"], data["type"], data["name"], data["qty"], that.editHTML_cell ]);
+								that.$dataTbl.fnAddDataAndDisplay([ rowData["student_id"], rowData["first_name"], rowData["last_name"], rowData["hobby"], that.editHTML_cell ]);
 								that.$tbl.find('input.new').each(function(){
 									$(this).val("");
 								});
@@ -324,14 +311,14 @@ App.prototype = {
 	  @param {object} nRow jquery reference to the target row to save
 	  @param {string} student_id id of the row to remove from the table
 	*/
-	deleteRow : function( oTable, nRow, p_part_id){
+	deleteRow : function( oTable, nRow, p_student_id){
 		var that = this;
-		if (typeof p_part_id === "string"){
-			console.log("delete row for "+p_part_id);
+		if (typeof p_student_id === "string"){
+			console.log("delete row for "+p_student_id);
 			$.ajax({
-				url: "../delete/"+p_part_id,
+				data: {"delete": true, "student_id": p_student_id},
 				dataType: "json",
-				type: "DELETE",
+				type: "POST",
 				success: function(data, status, xhr){
 					if (typeof data === "object"){
 						if ("error" in data && "msg" in data){
@@ -396,60 +383,6 @@ App.prototype = {
 
 $( document ).ready(function() {
 	console.log("test");
-	
-	$.ajax({
-		url: "./all",
-		dataType: "json",
-		success:function(data, status, xhr){
-			console.log(data);
-			if (data && $.isArray(data)){
-				var app = new App({"headers":["ID","TYPE","NAME","QTY"], "data": data});
-				app.loadTable();
-			
-			}
-		
-		},
-		error:function(xhr, status, error){
-			console.log(error);
-		}
-	
-	});
-	
-	
+	var app = new App({"headers":tblHeaders, "data": tblData});
+	app.loadTable();
  });
-
-
-/*
-$(document).ready(function(){
-	console.log("text");
-	$.ajax({
-		url: "./all",
-		dataType: "json",
-		success:function(data, status, xhr){
-			var i, len, $list = $('ul.comp_list'), $el;
-			console.log(data);
-			if (data && $.isArray(data)){
-				for (i=0, len=data.length; i<len; i++){
-					if (data[i] && typeof data[i] === "object"){
-						if ("type" in data[i] && "name" in data[i] && "qty" in data[i]){
-							console.log (data[i]);
-							$el  = $('<li>').append($('<span>').text(data[i].type+":").addClass("hwtype"));
-							$el.append($('<span>').text(data[i].name));
-							$el.append($('<span>').text(data[i].qty));
-							$list.append($el);
-						}
-					}
-				}
-			
-			}
-		
-		},
-		error:function(xhr, status, error){
-			console.log(error);
-		}
-	
-	});
-
-});
-
-*/

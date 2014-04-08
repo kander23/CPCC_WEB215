@@ -90,14 +90,14 @@ module.exports = function(flights){
 		var req_data = req.body;
 		if (req_data && typeof req_data === "object" && (Object.keys(req_data)).length > 0){
 			console.log(req_data)
-			if ('type' in req_data && 'name' in req_data && 'qty' in req_data){
-				PartSchema.savePart(req_data['type'],req_data['name'] ,req_data['qty']);
+			if ('TYPE' in req_data && 'NAME' in req_data && 'QTY' in req_data){
+				PartSchema.savePart(req_data['TYPE'],req_data['NAME'] ,req_data['QTY'], res);
 			}
 			else{
 				res.json(500, {status: 'error', msg:"invalid parameters"});
 		
 			}
-			res.json({status: 'done'});
+			
 		}
 		else{
 			res.json(500, {status: 'error', msg:"missing parameters"});
@@ -106,7 +106,12 @@ module.exports = function(flights){
 	};
 	
 	functions.login = function(req, res){
-		res.render('login', {'title':'Log In'});
+		var mode = req.param("mode") || "showall";
+		console.log("test outer: "+(typeof mode));
+		if (typeof mode === "string"){
+			console.log("test: "+mode);
+		}
+		res.render('login', {'title':'Log In', 'target': mode});
 	};
 
 	functions.showall = function(req, res){
@@ -116,6 +121,27 @@ module.exports = function(flights){
 			res.render('showall', {title: 'Welcome!', user:req.user});
 		}
 		 
+	};
+	
+	functions.crud = function(req, res){
+		if (req.session.passport.user === 'undefined'){
+			res.redirect('/login');
+		}else{
+			res.render('crud', {title: 'Welcome!', user:req.user});
+		}
+		 
+	};
+	
+	functions.delete = function(req, res){
+		var el_id = req.param('id');
+		if (typeof el_id === "string"){
+			PartSchema.deletePart(el_id, res);
+
+		}
+		else{
+			res.json(500, {status: 'error', msg:"missing parameters"});
+		}
+				 
 	};
 
 	return functions;

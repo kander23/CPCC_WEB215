@@ -54,17 +54,40 @@ module.exports = function(flights, db){
 
 	app.get('/list', routes.list);
 	
+	app.delete('/delete/:id', routes.delete);
+	
 	app.get('/all', routes.all);
 	
 	//app.put('/newpart/:type/:name/:qty', routes.newpart);
 	app.post('/newpart', routes.newpart);
 	
 	app.get('/login', routes.login);
-	app.post('/login', passport.authenticate('local', {
-		failureRedirect: '/login',
-		successRedirect: '/showall'
-	}));
+	app.get('/login/:mode', routes.login);
+	app.post('/login', function(req, res, next){
+		var mode = req.body.target || "showall";
+		passport.authenticate('local', function(err, user, info){
+			if(err){ return next(err); }
+			if (!user){ return res.redirect('/login'); }
+			
+			req.logIn(user, function(err){
+				if (err){ return next(err); }
+				
+				console.log("test "+mode);
+				if (mode && typeof mode === "string" && mode !== "showall"){
+					return res.redirect('/crud');
+				}
+				else{
+					return res.redirect('/showall');
+					
+				}
+			});
+			
+		})(req, res, next);
+		
+	});
 	
+	app.get('/crud', routes.crud);
+		
 	app.get('/showall', routes.showall);
 	
 	return app;

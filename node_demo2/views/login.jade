@@ -5,7 +5,8 @@ block content
 	.palettes
 		ul
 			li
-				form(method='post')
+				form(method='post' action="../login")
 					input(name='username', class='input-block-level', placeholder='username' type='text')
 					input(name='password', class='input-block-level', type='password', placeholder='password')
+					input(type="hidden", name="target", value=""+target)
 					input(type='submit', class='btn btn-primary', value='Log in')
